@@ -8,7 +8,7 @@
 </head>
 <body class="bg-gray-100">
 
-<!-- Навигация -->
+
 <nav class="bg-green-700 p-4 text-white flex justify-between">
   <a href="/" class="text-lg font-semibold">CRM Система</a>
   <div class="space-x-4">
@@ -19,18 +19,15 @@
   </div>
 </nav>
 
-<!-- Форма добавления заявки -->
 <div class="container mx-auto mt-10 max-w-lg bg-white p-6 rounded-lg shadow-lg">
   <h2 class="text-2xl font-bold text-gray-700 mb-4">Добавить новую заявку</h2>
 
   <form th:action="@{/add}" method="post" th:object="${request}" class="space-y-4">
-    <!-- Имя -->
     <div>
       <label class="block font-semibold text-gray-600">ФИО:</label>
       <input type="text" th:field="*{username}" class="border p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-green-400" required>
     </div>
 
-    <!-- Курс (Dropdown) -->
     <div>
       <label class="block font-semibold text-gray-600">Курс:</label>
       <select th:field="*{courseName}" class="border p-2 w-full rounded bg-white focus:outline-none focus:ring-2 focus:ring-green-400">
@@ -42,19 +39,16 @@
       </select>
     </div>
 
-    <!-- Телефон -->
     <div>
       <label class="block font-semibold text-gray-600">Телефон:</label>
       <input type="text" th:field="*{phone}" class="border p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-green-400" required>
     </div>
 
-    <!-- Комментарий -->
     <div>
       <label class="block font-semibold text-gray-600">Комментарий:</label>
       <textarea th:field="*{comment}" class="border p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-green-400"></textarea>
     </div>
 
-    <!-- Кнопки -->
     <div class="flex space-x-4">
       <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-lg flex-1 hover:bg-green-600 transition">
         ✅ Создать
