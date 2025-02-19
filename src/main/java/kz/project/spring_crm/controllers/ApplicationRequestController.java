@@ -61,11 +61,12 @@ public class ApplicationRequestController {
         return "request-detail";
     }
 
-    @DeleteMapping("/{id}")
-    public String deleteRequestById(@PathVariable Long id) {
+    @PostMapping("/requests/{id}/delete")
+    public String deleteRequest(@PathVariable Long id) {
         requestService.deleteRequest(id);
         return "redirect:/";
     }
+
 
     @PostMapping("/requests/{id}/status")
     public String updateRequestStatus(@PathVariable Long id, Model model) {
@@ -74,6 +75,23 @@ public class ApplicationRequestController {
         if (updatedRequest == null) {
             model.addAttribute("errorMessage", "Запрашиваемая заявка не найдена.");
             return "error/404";
+        }
+
+        return "redirect:/";
+    }
+
+    @PostMapping("/requests/{id}/edit")
+    public String editRequest(@PathVariable Long id, @ModelAttribute ApplicationRequest updatedRequest) {
+        ApplicationRequest existingRequest = requestService.getRequestById(id);
+
+        if (existingRequest != null) {
+            existingRequest.setUsername(updatedRequest.getUsername());
+            existingRequest.setCourseName(updatedRequest.getCourseName());
+            existingRequest.setComment(updatedRequest.getComment());
+            existingRequest.setPhone(updatedRequest.getPhone());
+            existingRequest.setHandled(existingRequest.isHandled());
+
+            requestService.saveRequest(existingRequest);
         }
 
         return "redirect:/";

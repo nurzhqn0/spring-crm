@@ -4,37 +4,67 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Добавить заявку</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
+
+<!-- Навигация -->
 <nav class="bg-green-700 p-4 text-white flex justify-between">
   <a href="/" class="text-lg font-semibold">CRM Система</a>
-  <div>
-    <a href="/" class="mx-2">Все Заявки</a>
-    <a href="/?isHandled=false" class="mx-2">Новые Заявки</a>
-    <a href="/?isHandled=true" class="mx-2">Обработанные заявки</a>
-    <a href="/add" class="bg-green-500 px-3 py-1 rounded">+ Добавить заявку</a>
+  <div class="space-x-4">
+    <a href="/" class="hover:underline">Все Заявки</a>
+    <a href="/?isHandled=false" class="hover:underline">Новые Заявки</a>
+    <a href="/?isHandled=true" class="hover:underline">Обработанные заявки</a>
+    <a href="/add" class="bg-green-500 px-3 py-1 rounded hover:bg-green-600 transition">+ Добавить заявку</a>
   </div>
 </nav>
 
-<div class="container mx-auto mt-6 max-w-lg bg-white p-6 rounded shadow">
-  <h2 class="text-lg font-bold mb-4">Добавить новую заявку</h2>
+<!-- Форма добавления заявки -->
+<div class="container mx-auto mt-10 max-w-lg bg-white p-6 rounded-lg shadow-lg">
+  <h2 class="text-2xl font-bold text-gray-700 mb-4">Добавить новую заявку</h2>
 
-  <form th:action="@{/add}" method="post" th:object="${request}">
-    <label class="block font-semibold">Имя:</label>
-    <input type="text" th:field="*{username}" class="border p-2 w-full mb-3" required>
+  <form th:action="@{/add}" method="post" th:object="${request}" class="space-y-4">
+    <!-- Имя -->
+    <div>
+      <label class="block font-semibold text-gray-600">ФИО:</label>
+      <input type="text" th:field="*{username}" class="border p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-green-400" required>
+    </div>
 
-    <label class="block font-semibold">Курс:</label>
-    <input type="text" th:field="*{courseName}" class="border p-2 w-full mb-3" required>
+    <!-- Курс (Dropdown) -->
+    <div>
+      <label class="block font-semibold text-gray-600">Курс:</label>
+      <select th:field="*{courseName}" class="border p-2 w-full rounded bg-white focus:outline-none focus:ring-2 focus:ring-green-400">
+        <option value="" disabled selected>Выберите курс</option>
+        <option value="Java Standard Edition">Java Standard Edition</option>
+        <option value="Python Programming">Python Programming</option>
+        <option value="Web Technologies">Web Technologies</option>
+        <option value="UX/UI Design">UX/UI Design</option>
+      </select>
+    </div>
 
-    <label class="block font-semibold">Комментарий:</label>
-    <textarea th:field="*{comment}" class="border p-2 w-full mb-3"></textarea>
+    <!-- Телефон -->
+    <div>
+      <label class="block font-semibold text-gray-600">Телефон:</label>
+      <input type="text" th:field="*{phone}" class="border p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-green-400" required>
+    </div>
 
-    <label class="block font-semibold">Телефон:</label>
-    <input type="text" th:field="*{phone}" class="border p-2 w-full mb-3" required>
+    <!-- Комментарий -->
+    <div>
+      <label class="block font-semibold text-gray-600">Комментарий:</label>
+      <textarea th:field="*{comment}" class="border p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-green-400"></textarea>
+    </div>
 
-    <button type="submit" class="bg-green-500 px-4 py-2 text-white rounded">Создать</button>
+    <!-- Кнопки -->
+    <div class="flex space-x-4">
+      <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-lg flex-1 hover:bg-green-600 transition">
+        ✅ Создать
+      </button>
+      <a href="/" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-lg flex-1 text-center hover:bg-gray-400 transition">
+        ❌ Отмена
+      </a>
+    </div>
   </form>
 </div>
+
 </body>
 </html>

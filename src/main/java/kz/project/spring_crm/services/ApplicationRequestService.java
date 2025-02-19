@@ -33,7 +33,6 @@ public class ApplicationRequestService {
     }
 
     public ApplicationRequest saveRequest(ApplicationRequest request) {
-        request.setHandled(false);
         return repository.save(request);
     }
 
