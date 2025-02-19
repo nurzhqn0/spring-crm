@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM Система</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+<!-- Навигация -->
+<nav class="bg-green-700 p-4 text-white flex justify-between">
+    <a href="/" class="text-lg font-semibold">CRM Система</a>
+    <div>
+        <a href="/" class="mx-2">Все Заявки</a>
+        <a href="/?isHandled=false" class="mx-2">Новые Заявки</a>
+        <a href="/?isHandled=true" class="mx-2">Обработанные заявки</a>
+        <a href="/add" class="bg-green-500 px-3 py-1 rounded">+ Добавить заявку</a>
+    </div>
+</nav>
+
+<!-- Контент -->
+<div class="container mx-auto mt-6">
+    <div class="grid grid-cols-2 gap-4">
+        <div th:each="request : ${requests}" class="bg-white p-4 rounded shadow">
+            <p class="text-lg font-bold">
+                <span th:if="${!request.isHandled()}" class="text-red-600 font-semibold">*(Новая)</span>
+                Заявка от <span th:text="${request.getUsername()}"></span>
+            </p>
+            <p class="text-gray-600">
+                Курс: <span class="font-semibold" th:text="${request.getCourseName()}"></span>
+            </p>
+            <p th:text="${request.getComment()}"></p>
+            <p class="mt-2 font-semibold">Тел: <span th:text="${request.getPhone()}"></span></p>
+            <a th:href="@{/requests/{id}(id=${request.id})}" class="text-blue-500 mt-2 inline-block">Подробнее</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

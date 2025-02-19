@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Детали заявки</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+
+<nav class="bg-green-700 p-4 text-white flex justify-between">
+    <a href="/" class="text-lg font-semibold">CRM Система</a>
+    <div>
+        <a href="/" class="mx-2">Все Заявки</a>
+        <a href="/?isHandled=false" class="mx-2">Новые Заявки</a>
+        <a href="/?isHandled=true" class="mx-2">Обработанные заявки</a>
+        <a href="/add" class="bg-green-500 px-3 py-1 rounded">+ Добавить заявку</a>
+    </div>
+</nav>
+
+<div class="container mx-auto mt-6 max-w-lg bg-white p-6 rounded shadow">
+    <h2 class="text-xl font-bold">
+        Заявка от <span th:text="${request.username}"></span>
+    </h2>
+    <p class="text-gray-600">
+        Курс: <span class="font-semibold" th:text="${request.courseName}"></span>
+    </p>
+    <p th:text="${request.comment}"></p>
+    <p class="mt-2 font-semibold">Тел: <span th:text="${request.phone}"></span></p>
+
+    <form th:action="@{/requests/{id}/status(id=${request.id})}" method="post">
+        <button type="submit" class="bg-green-500 px-3 py-1 text-white rounded">Обработано</button>
+    </form>
+
+
+
+    <div class="mt-6">
+        <a href="/" class="text-blue-500">Назад</a>
+    </div>
+</div>
+
+</body>
+</html>
